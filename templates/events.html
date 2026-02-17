@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Upcoming Events{% endblock %}
+{% block content %}
+<h1>Upcoming Events</h1>
+{% if events %}
+    {% for event in events %}
+    <article class="event-card"
+             onclick="window.location='{{ url_for('event_detail', event_id=event.id) }}'">
+        <header>
+            <strong>{{ event.summary }}</strong>
+            <br>
+            <span class="event-meta">{{ event.start | format_datetime }}</span>
+        </header>
+        {% if event.location %}
+        <small>{{ event.location }}</small>
+        {% endif %}
+    </article>
+    {% endfor %}
+{% else %}
+    <p>No upcoming events found.</p>
+{% endif %}
+{% endblock %}
