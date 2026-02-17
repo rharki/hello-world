@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ event.summary }} - Prep{% endblock %}
+{% block content %}
+<a href="{{ url_for('events') }}">&larr; Back to events</a>
+
+<article>
+    <header>
+        <h2>{{ event.summary }}</h2>
+        <p class="event-meta">
+            {{ event.start | format_datetime }}
+            {% if event.location %} &mdash; {{ event.location }}{% endif %}
+        </p>
+    </header>
+    {% if event.description %}
+    <details>
+        <summary>Event description</summary>
+        <p>{{ event.description }}</p>
+    </details>
+    {% endif %}
+    {% if event.attendees %}
+    <details>
+        <summary>Attendees ({{ event.attendees | length }})</summary>
+        <ul>
+            {% for a in event.attendees %}
+            <li>{{ a }}</li>
+            {% endfor %}
+        </ul>
+    </details>
+    {% endif %}
+</article>
+
+<h3>Preparation To-Dos</h3>
+{% if todos %}
+    {% for todo in todos %}
+    <article class="todo-{{ todo.priority }}">
+        <strong>{{ todo.task }}</strong>
+        <br>
+        <small class="event-meta">Priority: {{ todo.priority }}</small>
+    </article>
+    {% endfor %}
+{% else %}
+    <p>No to-dos generated yet.</p>
+{% endif %}
+
+<form method="POST" action="{{ url_for('refresh_todos', event_id=event.id) }}">
+    <button type="submit" class="outline">Regenerate To-Dos</button>
+</form>
+{% endblock %}

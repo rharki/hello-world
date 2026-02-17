@@ -1,0 +1,7 @@
+Flask==3.1.*
+anthropic==0.*
+google-api-python-client==2.*
+google-auth-oauthlib==1.*
+google-auth==2.*
+python-dotenv==1.*
+gunicorn==23.*

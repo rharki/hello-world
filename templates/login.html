@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Sign In - Calendar Prep{% endblock %}
+{% block content %}
+<article>
+    <header>
+        <h1>Calendar Prep</h1>
+        <p>AI-powered preparation to-do lists for your upcoming calendar events.</p>
+    </header>
+    <p>Connect your Google Calendar to get started. We'll read your upcoming events
+       and use AI to suggest what you should do to prepare for each one.</p>
+    <a href="{{ url_for('authorize') }}" role="button">Connect Google Calendar</a>
+</article>
+{% endblock %}
